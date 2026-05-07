@@ -30,8 +30,6 @@ For each state:
 ### Step 5
 Update the state value using the Bellman Equation:
 
-:contentReference[oaicite:0]{index=0}
-
 Where:
 - \( \pi(a|s) \) → Policy
 - \( \gamma \) → Discount factor
@@ -48,62 +46,7 @@ Display the final state-value grid.
 
 # Program
 
-```python
-import numpy as np
-
-# Grid size
-grid_size = 4
-
-# Discount factor
-gamma = 0.9
-
-# Initialize value function
-V = np.zeros((grid_size, grid_size))
-
-# Actions: Up, Down, Left, Right
-actions = [(-1,0), (1,0), (0,-1), (0,1)]
-
-# Terminal states
-terminal_states = [(0,0), (3,3)]
-
-# Iterative Policy Evaluation
-for iteration in range(100):
-
-    new_V = np.copy(V)
-
-    for i in range(grid_size):
-        for j in range(grid_size):
-
-            # Skip terminal states
-            if (i,j) in terminal_states:
-                continue
-
-            value = 0
-
-            for action in actions:
-
-                next_i = i + action[0]
-                next_j = j + action[1]
-
-                # Stay within boundary
-                if next_i < 0 or next_i >= grid_size:
-                    next_i = i
-
-                if next_j < 0 or next_j >= grid_size:
-                    next_j = j
-
-                reward = -1
-
-                value += 0.25 * (
-                    reward + gamma * V[next_i][next_j]
-                )
-
-            new_V[i][j] = value
-
-    V = new_V
-
-print("State Value Function:\n")
-print(V)
+```
 ```
 
 ---
@@ -113,10 +56,7 @@ print(V)
 ```text
 State Value Function:
 
-[[ 0.   -5.3  -7.1  -7.7]
- [-5.3  -6.5  -7.0  -7.1]
- [-7.1  -7.0  -6.5  -5.3]
- [-7.7  -7.1  -5.3   0. ]]
+
 ```
 
 ---
